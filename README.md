@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="assets/logo.jpg" width="40" />
+  <img src="assets/logo.jpg" width="80" />
   TowerMind
 </h1>
 
