@@ -44,16 +44,30 @@ python -m pip install mlagents==1.1.0
 python ./hello_world.py
 ```
 
-
-
-
-
 # 📑 Documentation
 
+Obs Space:
+Pixel-Based, Textual, and Structured Game-State
+
+Action Space (Please refer to the following figure):
+<p align="center">
+  <img src="assets/environment.png" width="500">
+</p>
+
+About Env Basic Settings:
 TowerMind is built upon the Unity ML-Agents Toolkit. For more details on customizing features, please refer to the official Unity ML-Agents [documentation](https://github.com/Unity-Technologies/ml-agents).
+
+TowerMind Customizability:
+Directory`./extracted/linux/td_Data/StreamingAssets/Config`includes all configurable files for TowerMind, which control various utility features and property settings of environment elements.
+
+
+Possible Problems:
+1.[Vulkan](https://vulkan.lunarg.com/sdk/home) may need to be installed when CPU rendering is required.
 
 # 🚀 Roadmap
 As our team is currently engaged in other ongoing research projects, this repository is not yet fully polished. However, we will continue to actively maintain and update it.
+
+The level editor will be released soon.
 
 Please note that the current version of TowerMind already fully supports both LLM-based and RL-based evaluations. 
 
