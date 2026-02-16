@@ -23,13 +23,7 @@ TowerMind is built upon the Unity ML-Agents Toolkit. For more details on customi
 # 🚀 Roadmap
 As our team is currently engaged in other ongoing research projects, this repository is not yet fully polished. However, we will continue to actively maintain and update it.
 
-Please note that the current version of TowerMind already fully supports both LLM-based and RL-based evaluations. However, researchers are currently required to implement and debug certain intermediate interface code. The upcoming releases of the LLM and RL evaluation modules will primarily provide these intermediate components.
-
-Thank you for your understanding. 
-
-- ✅ Initial environment release (before February 16, 2026)
-- ⬜ LLM evaluation module release (before February 28, 2026)
-- ⬜ RL evaluation module release (before March 31, 2026)
+Please note that the current version of TowerMind already fully supports both LLM-based and RL-based evaluations. 
 
 # 📚 Citation
 

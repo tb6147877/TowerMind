@@ -11,7 +11,7 @@ engine_config_channel.set_configuration_parameters(target_frame_rate=-1)
 engine_config_channel.set_configuration_parameters(time_scale=20.0)
 engine_config_channel.set_configuration_parameters(capture_frame_rate=60)
 
-unity_env = UnityEnvironment("/home/dawei/TowerMind/extracted/linux/td.x86_64",side_channels=[engine_config_channel])
+unity_env = UnityEnvironment("/home/[your user name]/TowerMind/extracted/linux/td.x86_64",side_channels=[engine_config_channel])
 env = UnityToGymWrapper(unity_env, uint8_visual=True, allow_multiple_obs=True)
 env = Continuous2DiscreteActionWrapper(env)
 
