@@ -51,7 +51,7 @@ Pixel-Based, Textual, and Structured Game-State
 
 Action Space (Please refer to the following figure):
 <p align="center">
-  <img src="assets/environment.png" width="500">
+  <img src="assets/environment.png" width="1000">
 </p>
 
 About Env Basic Settings:
