@@ -19,7 +19,7 @@ env = Continuous2DiscreteActionWrapper(env)
 state=env.reset()
 #print(state[0]) # Pixel Obs
 #print(get_json_from_obs(state[1])) # Json Obs
-print(get_state_from_obs(state[1])) # State Obs
+#print(get_state_from_obs(state[1])) # State Obs
 
 done = False
 
@@ -28,6 +28,6 @@ while not done:
     state, _, done, info = env.step(action)
     # print(state[0]) # Pixel Obs
     # print(get_json_from_obs(state[1])) # Json Obs
-    print(get_state_from_obs(state[1])) # State Obs
+    #print(get_state_from_obs(state[1])) # State Obs
 
 env.close()

@@ -16,6 +16,38 @@ This repository provides the official codebase for the paper "TowerMind: A Tower
 
 # 📦 Getting Started
 
+## 1.Clone the Repo:
+```bash
+git clone git@github.com:tb6147877/TowerMind.git
+
+cd TowerMind
+```
+
+## 2.Extracted the Env:
+```bash
+unzip compressed_env/linux.zip -d extracted/
+
+chmod +x ./extracted/linux/td.x86_64
+```
+
+## 3.1Play as a Human:
+```bash
+./extracted/linux/td.x86_64
+```
+
+## 3.2Use as a Gym Env:
+```bash
+conda create -n towermind python=3.10.12 && conda activate towermind
+
+python -m pip install mlagents==1.1.0
+
+python ./hello_world.py
+```
+
+
+
+
+
 # 📑 Documentation
 
 TowerMind is built upon the Unity ML-Agents Toolkit. For more details on customizing features, please refer to the official Unity ML-Agents [documentation](https://github.com/Unity-Technologies/ml-agents).
