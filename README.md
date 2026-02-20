@@ -62,7 +62,7 @@ python ./hello_world.py
 # 📑 Documentation (🔥Ongoing Updates)
 
 Obs Space:
-Pixel-Based, Textual, and Structured Game-State
+Pixel-Based (512 x 512 x 3), Textual, and Structured Game-State
 
 Action Space (Please refer to the following figure):
 <p align="center">
