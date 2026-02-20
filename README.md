@@ -65,6 +65,8 @@ Obs Space:
 Pixel-Based (512 x 512 x 3), Textual, and Structured Game-State
 
 Action Space (Please refer to the following figure):
+ X Coordinate $\in$ [-3.0, 3.0], Y Coordinate $\in$ [-3.0, 3.0], Action Type $\in$ {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}. 
+For example, the action (-1.5, 1.2, 2) means "construct a Knight Tower at the location on the map with x-coordinate of -1.5 and y-coordinate of 1.2".
 <p align="center">
   <img src="assets/environment.png" width="1000">
 </p>
