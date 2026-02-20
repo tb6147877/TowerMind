@@ -1,6 +1,6 @@
 from mlagents_envs.environment import UnityEnvironment
 from mlagents_envs.envs.unity_gym_env import UnityToGymWrapper
-
+import random
 from common.wrappers import *
 from mlagents_envs.side_channel.engine_configuration_channel import EngineConfigurationChannel
 
@@ -16,18 +16,26 @@ env = UnityToGymWrapper(unity_env, uint8_visual=True, allow_multiple_obs=True)
 env = Continuous2DiscreteActionWrapper(env)
 
 
+def random_act():
+    x = random.uniform(-3, 3) # x coordinate, range from [-3.0, 3.0]
+    y = random.uniform(-3, 3) # y coordinate, range from [-3.0, 3.0]
+    b = random.randint(0, 11) # behaviour type
+    return np.array([x, y, b])
+
+
 state=env.reset()
-#print(state[0]) # Pixel Obs
+#print(state[0]) # Pixel Obs, 512*512*3
 #print(get_json_from_obs(state[1])) # Json Obs
 #print(get_state_from_obs(state[1])) # State Obs
 
 done = False
 
 while not done:
-    action = env.action_space.sample()
+    action = random_act()
+    #print(action)
     state, _, done, info = env.step(action)
-    # print(state[0]) # Pixel Obs
-    # print(get_json_from_obs(state[1])) # Json Obs
+    #print(state[0]) # Pixel Obs, 512*512*3
+    #print(get_json_from_obs(state[1])) # Json Obs
     #print(get_state_from_obs(state[1])) # State Obs
 
 env.close()
