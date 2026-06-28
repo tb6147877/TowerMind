@@ -17,6 +17,8 @@ This repository provides the official codebase for the paper "TowerMind: A Tower
 # 📌 News
 We are actively improving the documentation to better support researchers using TowerMind. Please keep an eye on this section for future updates.
 
+✅ Level editor update: Windows and Linux versions of the level editor, along with the tutorial documentation, have been updated.
+
 ✅ Documentation updated: How to select different benchmark levels by modifying the configuration.
 
 ⬜ Documentation on adjusting base level attributes via configuration files will be released soon. Stay tuned!
@@ -83,12 +85,16 @@ Directory`./extracted/linux/td_Data/StreamingAssets/Config`includes all configur
 Possible Problems:
 1.[Vulkan](https://vulkan.lunarg.com/sdk/home) may need to be installed when CPU rendering is required.
 
+# 🗺️ Level Editor
+
+
+
 # 🚀 Roadmap
-As our team is currently engaged in other ongoing research projects, this repository is not yet fully polished. However, we will continue to actively maintain and update it.
 
-The **Level Editor** will be released soon.
+Please note that the current version of TowerMind already fully supports both LLM-based and RL-based evaluations. We will continue to improve the relevant documentation, particularly the explanations of certain settings.
 
-Please note that the current version of TowerMind already fully supports both LLM-based and RL-based evaluations. 
+
+
 
 # 📚 Citation
 
