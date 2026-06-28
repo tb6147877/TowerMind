@@ -81,3 +81,4 @@ After completing the steps above, you can use your custom level in TowerMind.
 
 Other TowerMind game settings are consistent with the other documentation of this project and can be adjusted according to your needs.
 
+If you have any questions, please open an issue or contact the first author of TowerMind by email.

@@ -12,7 +12,7 @@
 </p>
 
 # 📖 Introduction
-This repository provides the official codebase for the paper "TowerMind: A Tower Defence Game Learning Environment and Benchmark for LLM as Agents." The paper is available on [arXiv](https://arxiv.org/abs/2601.05899). Detailed information and implementation specifics of TowerMind can be found in the paper.
+This repository provides the official codebase (including the TowerMind environment executables, the Gym interface, and the accompanying Level Editor) for the paper "TowerMind: A Tower Defence Game Learning Environment and Benchmark for LLM as Agents." The paper is available on [arXiv](https://arxiv.org/abs/2601.05899). Detailed information and implementation specifics of TowerMind can be found in the paper.
 
 # 📌 News
 We are actively improving the documentation to better support researchers using TowerMind. Please keep an eye on this section for future updates.
@@ -87,11 +87,14 @@ Possible Problems:
 
 # 🗺️ Level Editor
 
+The Level Editor provided with TowerMind allows researchers to create custom levels. The executable files and documentation are located in the `level_editor` folder.
+
 
 
 # 🚀 Roadmap
 
-Please note that the current version of TowerMind already fully supports both LLM-based and RL-based evaluations. We will continue to improve the relevant documentation, particularly the explanations of certain settings.
+Please note that the current version of TowerMind already fully supports both LLM-based and RL-based evaluations. We will continue to improve the relevant documentation, particularly the explanations of certain settings. If researchers encounter any issues while using the environment, they are encouraged to open an issue or contact the first author directly by email.
+
 
 
 
