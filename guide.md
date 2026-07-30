@@ -24,9 +24,9 @@ The `td_Data/StreamingAssets/Config` directory under the TowerMind executable co
 
 ### EnvConfig.json:
 1.`GeneralizationLevel`: This field specifies the degree of generalization applied to level selection:
-* `0`-FixedLevels: Repeatedly runs the level specified by the `CurrentLevel` field in `FixedLevelsConfig.json`.
-* `1`-RandomLevels: Randomly selects a level for each episode from the level-list configuration file specified by `LevelsConfigFileName`.
-* `2`-RandomLevelsRandomWaves: Randomly selects a level for each episode from the level-list configuration file specified by `LevelsConfigFileName`. The enemy waves for the selected level are also randomly sampled from `AllWavesConfig.json`.
+* `0`—FixedLevels: Repeatedly runs the level specified by the `CurrentLevel` field in `FixedLevelsConfig.json`.
+* `1`—RandomLevels: Randomly selects a level for each episode from the level-list configuration file specified by `LevelsConfigFileName`.
+* `2`—RandomLevelsRandomWaves: Randomly selects a level for each episode from the level-list configuration file specified by `LevelsConfigFileName`. The enemy waves for the selected level are also randomly sampled from `AllWavesConfig.json`.
 
 2.`NeedsNaturalLanguageObservation`: Whether to enable test observations: 0—disabled; 1—enabled.
 
