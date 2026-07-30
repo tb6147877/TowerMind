@@ -22,7 +22,25 @@ For example, the action (-1.5, 1.2, 2) means "construct a Knight Tower at the lo
 The `td_Data/StreamingAssets/Config` directory under the TowerMind executable contains all configurable files for TowerMind. These files control various utility features and property settings of environment elements. This section provides a detailed explanation of the meaning and usage of each configuration table.
 
 
-1. How to select different benchmark levels by modifying the configuration: Different benchmark levels can be selected by modifying the `CurrentLevel` field in the `FixedLevelsConfig` file. Valid values are integers ranging from `0` to `8`, meaning that TowerMind provides 9 built-in benchmark levels. Please DO NOT modify the `CustomLevelsConfig` file until the **Level Editor** is officially released.
+### EnvConfig.json:
+1.`GeneralizationLevel`: This field specifies the degree of generalization applied to level selection:
+* `0`-FixedLevels: Repeatedly runs the level specified by the `CurrentLevel` field in `FixedLevelsConfig.json`.
+* `1`-RandomLevels: Randomly selects a level for each episode from the level-list configuration file specified by `LevelsConfigFileName`.
+* `2`-RandomLevelsRandomWaves: Randomly selects a level for each episode from the level-list configuration file specified by `LevelsConfigFileName`. The enemy waves for the selected level are also randomly sampled from `AllWavesConfig.json`.
+
+2.`NeedsNaturalLanguageObservation`: Whether to enable test observations: 0—disabled; 1—enabled.
+
+3.`NeedsRealtimeLanguageObservation`: Whether to enable real-time text observations, such as each enemy’s health and position at every environment step: `0`—disabled; `1`—enabled. This feature takes effect only when `NeedsNaturalLanguageObservation` is set to `1`.
+
+
+
+### FixedLevelsConfig.json:
+1.`CurrentLevel`: Different benchmark levels can be selected by modifying this field. This field can be used to specify the level only when the `GeneralizationLevel` field in `EnvConfig.json` is set to `0`-FixedLevels. It has no effect when `GeneralizationLevel` is set to any other value. It needs to fill the level `ID` in the level-list configuration file specified by the `LevelsConfigFileName` field in `EnvConfig.json`.
+
+
+
+
+  
 
 
 ## 3. Other Notes:
