@@ -53,3 +53,5 @@ The `td_Data/StreamingAssets/Config` directory under the TowerMind executable co
 
 ## 3. Other Notes:
 ### 3.1 [Vulkan](https://vulkan.lunarg.com/sdk/home) may need to be installed when CPU rendering is required.
+
+### 3.2 For any configuration-related questions or bug reports, please contact the first author of TowerMind directly.
