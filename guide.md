@@ -39,6 +39,16 @@ The `td_Data/StreamingAssets/Config` directory under the TowerMind executable co
 
 6.`IsHumanPlayerPlaying`: This field indicates whether TowerMind is being played by a human: `0`—no; `1`—yes. When set to `1`, a user interface designed for human players will be displayed.
 
+7.`IsAutoPlayLevels`: This field specifies whether the system sequentially cycles through all levels listed in the level-list configuration file referenced by `LevelsConfigFileName`: `0`—enabled; `1`—disabled.
+
+8.`IsRepeatFailingLevels`: This field takes effect only when `IsAutoPlayLevels` is set to `1`. It specifies whether the current level should be replayed after a failure: `0`—do not replay; `1`—replay.
+
+
+9.`PassLevelsRequirement`: This field takes effect only when `IsRepeatFailingLevels` is set to `1`. It specifies the remaining-health threshold used to determine whether a level is completed successfully. If the remaining health at the end of the level is greater than this value, the level is considered successful; otherwise, it is considered failed.
+
+**Note**: 
+1. We strongly recommend setting `GeneralizationLevel` to `0` and manually selecting the desired level by modifying the `CurrentLevel` field in `FixedLevelsConfig.json`, as this provides the clearest and simplest configuration workflow.
+
 
 
 
