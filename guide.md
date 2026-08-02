@@ -43,8 +43,16 @@ The `td_Data/StreamingAssets/Config` directory under the TowerMind executable co
 
 8.`IsRepeatFailingLevels`: This field takes effect only when `IsAutoPlayLevels` is set to `1`. It specifies whether the current level should be replayed after a failure: `0`—do not replay; `1`—replay.
 
-
 9.`PassLevelsRequirement`: This field takes effect only when `IsRepeatFailingLevels` is set to `1`. It specifies the remaining-health threshold used to determine whether a level is completed successfully. If the remaining health at the end of the level is greater than this value, the level is considered successful; otherwise, it is considered failed.
+
+10.`IsDrlReward`: This field specifies whether a step penalty of −0.0005 is applied to the agent at each decision step: `0`—disabled; `1`—enabled.
+
+
+11.`RoundingDigits`: This field specifies the number of decimal places retained when floating-point state values from TowerMind’s underlying code are included in the text observation. For example, a value of 3 means that the values are rounded to three decimal places.
+
+
+12.`RandomSeed`: This field specifies the random seed used for running TowerMind. A negative value indicates that a random seed will be generated automatically, while a positive value indicates a user-defined random seed.
+
 
 **Note**: 
 1. We strongly recommend setting `GeneralizationLevel` to `0` and manually selecting the desired level by modifying the `CurrentLevel` field in `FixedLevelsConfig.json`, as this provides the clearest and simplest configuration workflow.
