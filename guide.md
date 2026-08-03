@@ -53,6 +53,13 @@ The `td_Data/StreamingAssets/Config` directory under the TowerMind executable co
 
 12.`RandomSeed`: This field specifies the random seed used for running TowerMind. A negative value indicates that a random seed will be generated automatically, while a positive value indicates a user-defined random seed.
 
+13.`DecisionPeriod`: This field is assigned to the `DecisionPeriod` property of the `DecisionRequester` component in [Unity ML-Agents](https://github.com/Unity-Technologies/ml-agents). Please refer to the relevant Unity ML-Agents documentation for further details. In simple terms, this value determines the number of environment steps between two consecutive agent decisions. During the intervening environment steps, the agent does not perform any action. In TowerMind, each environment step corresponds to `0.02` seconds.
+
+14.`GridHNum`: This field takes effect only when `IsDebug` is set to `1`. In debug mode, it is used to display the coordinate grid for TowerMind’s discretized continuous action space. Its value specifies the number of divisions along the x-axis.
+
+
+15.`GridVNum`: This field takes effect only when `IsDebug` is set to `1`. In debug mode, it is used to display the coordinate grid for TowerMind’s discretized continuous action space. Its value specifies the number of divisions along the y-axis.
+
 
 **Note**: 
 1. We strongly recommend setting `GeneralizationLevel` to `0` and manually selecting the desired level by modifying the `CurrentLevel` field in `FixedLevelsConfig.json`, as this provides the clearest and simplest configuration workflow.
