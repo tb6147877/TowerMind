@@ -28,9 +28,10 @@ The `td_Data/StreamingAssets/Config` directory under the TowerMind executable co
 * `1`—RandomLevels: Randomly selects a level for each episode from the level-list configuration file specified by `LevelsConfigFileName`.
 * `2`—RandomLevelsRandomWaves: Randomly selects a level for each episode from the level-list configuration file specified by `LevelsConfigFileName`. The enemy waves for the selected level are also randomly sampled from `AllWavesConfig.json`.
 
-2.`NeedsNaturalLanguageObservation`: Whether to enable test observations: 0—disabled; 1—enabled.
+2.`NeedsNaturalLanguageObservation (Deprecated)`: Whether to enable natural language observations: 0—disabled; 1—enabled. This field was part of an earlier attempt to embed prompts directly in the C# code and is now **deprecated**. Its value should remain set to `0`. Setting it to `1` may prevent the text observation from being generated in a valid JSON format.
 
-3.`NeedsRealtimeLanguageObservation`: Whether to enable real-time text observations, such as each enemy’s health and position at every environment step: `0`—disabled; `1`—enabled. This feature takes effect only when `NeedsNaturalLanguageObservation` is set to `1`.
+
+3.`NeedsRealtimeLanguageObservation (Deprecated)`: Whether to enable real-time language observations, such as each enemy’s health and position at every environment step: `0`—disabled; `1`—enabled. This feature takes effect only when `NeedsNaturalLanguageObservation` is set to `1`. This field was part of an earlier attempt to embed prompts directly in the C# code and is now **deprecated**. Its value should remain set to `0`. Setting it to `1` may prevent the text observation from being generated in a valid JSON format.
 
 4.`IsOnlyPixelObs`: This field indicates whether the TowerMind environment uses pixel observations exclusively: `0`—no; `1`—yes. To enable text observations, ensure that this field is set to `0`. When only pixel observations are required, setting this field to `1` can improve the environment’s execution speed.
 
@@ -60,9 +61,27 @@ The `td_Data/StreamingAssets/Config` directory under the TowerMind executable co
 
 15.`GridVNum`: This field takes effect only when `IsDebug` is set to `1`. In debug mode, it is used to display the coordinate grid for TowerMind’s discretized continuous action space. Its value specifies the number of divisions along the y-axis.
 
+16.`IsDebug`: This field controls whether auxiliary information related to action-space discretization is displayed: `1`—enabled; `2`—disabled.
+
+
+17.`IsRecordingEnabled`: This field primarily specifies whether recording mode is enabled when `IsHumanPlayerPlaying` is set to `1`. Recording mode captures the human player’s action at each environment step, the corresponding JSON-formatted game state, and a video recording of the gameplay.
+
+
+18.`RecordingPath`: This field specifies the directory in which recording files are stored. Please provide an absolute path. This feature is currently supported only on Windows.
+
+
+19.`CommonDescription (Deprecated)`: This field provides a general prompt describing the game and is used when `NeedsNaturalLanguageObservation` is set to `1`. This field was part of an earlier attempt to embed prompts directly in the C# code and is now **deprecated**.
+
+
+20.`Version`: This field is used by developers to record the current version number and does not affect the game’s runtime logic.
+
+
 
 **Note**: 
 1. We strongly recommend setting `GeneralizationLevel` to `0` and manually selecting the desired level by modifying the `CurrentLevel` field in `FixedLevelsConfig.json`, as this provides the clearest and simplest configuration workflow.
+
+2. Although this document describes the recording tools provided by TowerMind for human gameplay, we do not recommend relying on them. The recording logic is hard-coded on the C# side, meaning that users cannot inspect or modify its implementation. It therefore functions as a black box from the user’s perspective. In addition, the recorded data were designed specifically to support the experiments presented in the TowerMind paper and may not meet the requirements of other applications. We therefore recommend that users implement their own recording logic to collect the data needed for their specific purposes.
+
 
 
 
