@@ -75,6 +75,26 @@ The `td_Data/StreamingAssets/Config` directory under the TowerMind executable co
 
 20.`Version`: This field is used by developers to record the current version number and does not affect the game’s runtime logic.
 
+### BenchmarkLevelsConfig.json:
+
+This configuration file contains the settings for TowerMind’s built-in benchmark levels. The `Levels` field stores the detailed configuration of each level.
+
+1.`ID (Read-only)`: This field serves as the unique identifier of the level within the level-list configuration file. The game uses this field to determine which level to run. Its value must not be duplicated within this file, and users are not advised to modify it.
+
+
+2.`PicFilePath (Read-only)`: Do not modify this field. It is closely tied to game resource loading, and unauthorized changes may cause runtime errors.
+
+
+3.`FilePath (Read-only)`: Do not modify this field. It is closely tied to game resource loading, and unauthorized changes may cause runtime errors.
+
+
+4.`Difficulty (Deprecated)`: This field is deprecated. Modifying its value has no effect, and it is unrelated to the difficulty of the current level.
+
+
+5.`Waves`: This field is an integer array containing the `ID`s of enemy waves defined in `AllWavesConfig.json`. It specifies which enemy waves are included in the level.
+
+
+
 
 
 **Note**: 
