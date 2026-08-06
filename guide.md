@@ -77,7 +77,8 @@ The `td_Data/StreamingAssets/Config` directory under the TowerMind executable co
 
 ### BenchmarkLevelsConfig.json:
 
-This configuration file contains the settings for TowerMind’s built-in benchmark levels. The `Levels` field stores the detailed configuration of each level.
+This configuration file contains the settings for TowerMind’s built-in benchmark levels. The `Levels` field stores the detailed configuration of each level. Each level is played as a single episode.
+
 
 1.`ID (Read-only)`: This field serves as the unique identifier of the level within the level-list configuration file. The game uses this field to determine which level to run. Its value must not be duplicated within this file, and users are not advised to modify it.
 
@@ -93,6 +94,19 @@ This configuration file contains the settings for TowerMind’s built-in benchma
 
 5.`Waves`: This field is an integer array containing the `ID`s of enemy waves defined in `AllWavesConfig.json`. It specifies which enemy waves are included in the level.
 
+6.`MaxMoney`: This field specifies the maximum number of coins that the player can hold during an episode. Once this limit is reached, collecting additional coins will not increase the player’s coin count.
+
+
+7.`InitialMoney`: This field specifies the amount of starting funds provided to the player at the beginning of the level.
+
+
+8.`TotalLife`: This field specifies the player’s total health for the episode. At the beginning of the episode, the player’s current health is initialized to this value. Each time an enemy reaches the player’s base, the player’s health is reduced by one. The episode ends when the player’s health reaches `0`.
+
+
+9.`WavesInterval`: This field specifies the time interval between two consecutive enemy waves, measured in seconds.
+
+
+10.`CountdownTime`: This field specifies how many seconds before the next enemy wave begins the countdown is displayed. Its value must be less than `WavesInterval`.
 
 
 
