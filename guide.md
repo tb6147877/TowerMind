@@ -108,6 +108,22 @@ This configuration file contains the settings for TowerMind’s built-in benchma
 
 10.`CountdownTime`: This field specifies how many seconds before the next enemy wave begins the countdown is displayed. Its value must be less than `WavesInterval`.
 
+11.`TowerSellingDiscount`: This field specifies the fraction of a tower’s original purchase price that is refunded when the tower is sold. For example, a value of `1.0` refunds the full original purchase price, while a value of `0.8` refunds 80% of the original purchase price.
+
+
+12.`GoldCoinsRefreshTime`: This field specifies the time interval, in seconds, before a coin respawns after the previous coin disappears, either because it was collected or because it reached its maximum lifetime.
+
+
+13.`GoldCoinsResidenceTime`: This field specifies the maximum lifetime, in seconds, that a coin remains at its spawned location. If the coin is not collected within this period, it disappears.
+
+
+14.`GoldCoinsValue`: This field specifies the base number of coins awarded to the player when a coin is collected in this level.
+
+
+15.`GoldCoinsExtraValue`: This field specifies the random range of the additional coin reward beyond the base value defined by `GoldCoinsValue`. For example, if this field is set to `30`, collecting a coin awards the player the base `GoldCoinsValue` plus a random additional amount between `0` and `30`.
+
+
+16.`Is_User_Generated`: This field indicates whether the level is a custom level created by the user with the Level Editor. Since this configuration file contains only the built-in levels provided by TowerMind, this field is set to `false` for all levels.
 
 
 
