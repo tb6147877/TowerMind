@@ -75,6 +75,11 @@ The `td_Data/StreamingAssets/Config` directory under the TowerMind executable co
 
 20.`Version`: This field is used by developers to record the current version number and does not affect the game’s runtime logic.
 
+**Note**: 
+1. We strongly recommend setting `GeneralizationLevel` to `0` and manually selecting the desired level by modifying the `CurrentLevel` field in `FixedLevelsConfig.json`, as this provides the clearest and simplest configuration workflow.
+
+2. Although this document describes the recording tools provided by TowerMind for human gameplay, we do not recommend relying on them. The recording logic is hard-coded on the C# side, meaning that users cannot inspect or modify its implementation. It therefore functions as a black box from the user’s perspective. In addition, the recorded data were designed specifically to support the experiments presented in the TowerMind paper and may not meet the requirements of other applications. We therefore recommend that users implement their own recording logic to collect the data needed for their specific purposes.
+
 ### BenchmarkLevelsConfig.json:
 
 This configuration file contains the settings for TowerMind’s built-in benchmark levels. The `Levels` field stores the detailed configuration of each level. Each level is played as a single episode.
@@ -127,12 +132,20 @@ This configuration file contains the settings for TowerMind’s built-in benchma
 
 
 
-**Note**: 
-1. We strongly recommend setting `GeneralizationLevel` to `0` and manually selecting the desired level by modifying the `CurrentLevel` field in `FixedLevelsConfig.json`, as this provides the clearest and simplest configuration workflow.
+### CustomLevelsConfig.json:
 
-2. Although this document describes the recording tools provided by TowerMind for human gameplay, we do not recommend relying on them. The recording logic is hard-coded on the C# side, meaning that users cannot inspect or modify its implementation. It therefore functions as a black box from the user’s perspective. In addition, the recorded data were designed specifically to support the experiments presented in the TowerMind paper and may not meet the requirements of other applications. We therefore recommend that users implement their own recording logic to collect the data needed for their specific purposes.
+This configuration file contains the settings for custom levels created by users with the Level Editor. Many of its configuration fields have already been described in `BenchmarkLevelsConfig.json`; therefore, this section only introduces the fields that are specific to this file. Some of the descriptions may require reference to the relevant sections in `TowerMind/level_editor/document.md`.
 
 
+1.`Is_User_Generated`: This field indicates whether the level is a custom level created by the user with the Level Editor. Since this configuration file contains only custom levels created by users, this field is set to `true` for all levels.
+
+
+2.`CustomEnemiesPaths`: This field specifies the enemy attack paths in the level. Since a level may contain multiple paths, the field is represented as a two-dimensional array. The outer array stores each complete path in the level, while each inner array contains the 2D coordinates of the waypoints that define that path. Enemies move in straight lines from one waypoint to the next along the specified path.
+
+3.`DestinationPosIcon`: This field specifies the 2D coordinates of the green circle that marks the location of the player’s base in the level.
+
+
+4.`TowerPoints`: This field specifies the locations of all tower points in the level. It is represented as a two-dimensional array. The outer array contains the individual tower points in the level, while each inner array contains two 2D coordinates: the first specifies the position of the tower point itself, and the second specifies the default gathering position for knights after a Knight Tower is built at that tower point. Towers can only be constructed on tower points.
 
 
 
