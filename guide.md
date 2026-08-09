@@ -148,10 +148,28 @@ This configuration file contains the settings for custom levels created by users
 4.`TowerPoints`: This field specifies the locations of all tower points in the level. It is represented as a two-dimensional array. The outer array contains the individual tower points in the level, while each inner array contains two 2D coordinates: the first specifies the position of the tower point itself, and the second specifies the default gathering position for knights after a Knight Tower is built at that tower point. Towers can only be constructed on tower points.
 
 
-
 ### FixedLevelsConfig.json:
 1.`CurrentLevel`: Different benchmark levels can be selected by modifying this field. This field can be used to specify the level only when the `GeneralizationLevel` field in `EnvConfig.json` is set to `0`—FixedLevels. It has no effect when `GeneralizationLevel` is set to any other value. It needs to fill the level `ID` in the level-list configuration file specified by the `LevelsConfigFileName` field in `EnvConfig.json`.
 
+
+### TowerConfig.json:
+
+This configuration file contains the settings related to the Knight Tower, Magician Tower, and Archer Tower. TowerMind supports only these three tower types, and additional tower types cannot be added.
+
+
+1.`Type (Read-only)`: This field specifies the tower type: `0`—Knight Tower; `1`—Magician Tower; `2`—Archer Tower. Do not modify this field, as doing so may cause runtime errors.
+
+
+2.`Price`: This field specifies the number of coins required to build this type of tower.
+
+
+3.`AttackSpeed`: This field specifies the attack interval of this tower type, measured in seconds. For the Knight Tower, it determines the interval between producing knights; for the Magician Tower and Archer Tower, it determines the interval between consecutive attacks.
+
+
+4.`AttackDamage`: This field specifies the base attack damage of this tower type. It has no effect on the Knight Tower.
+
+
+5.`AttackExtraDamage`: This field specifies the random range of additional damage beyond the base value defined by `AttackDamage`. For example, if this field is set to `30`, the total damage dealt by this tower in a single attack is the base `AttackDamage` plus a random additional amount between `0` and `30`.
 
 
 
