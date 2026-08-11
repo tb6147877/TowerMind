@@ -186,14 +186,28 @@ This configuration file contains the settings related to the Knight Tower, Magic
 
 11.`UpgradeGrowth`: This field specifies the upgrade multiplier for this tower type. For the Magician Tower and Archer Tower, it increases their attack damage. The damage is calculated as `(AttackDamage + a random value between 0 and AttackExtraDamage) × this field^(tower level)`. For the Knight Tower, the upgrade is reflected in the knights it produces. Both the knights’ movement speed and attack damage are increased, following the same calculation described above.
 
-
-
 12.`Description (Deprecated)`: This field was used in earlier versions to describe different tower types and is now **deprecated**.
 
 
+### KnightConfig.json:
+
+This configuration file defines the attributes of knights. Both the knights produced by Knight Towers and those summoned through Knight Reinforcements are controlled by the settings in this file.
 
 
-  
+1.`FilePath (Read-only)`: This field is required for resource loading during gameplay. Do not modify it.
+
+
+2.`Health`: This field specifies the maximum health of a knight.
+
+3.`MovementSpeed`: This field specifies the movement speed of a knight, i.e., the distance it travels per second.
+
+4.`AttackSpeed`: This field specifies the attack interval of a knight, measured in seconds. A smaller value corresponds to a faster attack speed.
+
+
+5.`AttackDamage`: This field specifies the base attack damage of a knight.
+
+
+6.`AttackExtraDamage`: This field specifies the random range of additional damage beyond the base value defined by `AttackDamage`. For example, if this field is set to `30`, the total damage dealt by a knight in a single attack is the base `AttackDamage` plus a random additional amount between `0` and `30`.
 
 
 ## 3. Other Notes:
