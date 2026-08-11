@@ -94,7 +94,7 @@ This configuration file contains the settings for TowerMind’s built-in benchma
 3.`FilePath (Read-only)`: Do not modify this field. It is closely tied to game resource loading, and unauthorized changes may cause runtime errors.
 
 
-4.`Difficulty (Deprecated)`: This field is deprecated. Modifying its value has no effect, and it is unrelated to the difficulty of the current level.
+4.`Difficulty (Deprecated)`: This field is **deprecated**. Modifying its value has no effect, and it is unrelated to the difficulty of the current level.
 
 
 5.`Waves`: This field is an integer array containing the `ID`s of enemy waves defined in `AllWavesConfig.json`. It specifies which enemy waves are included in the level.
@@ -170,6 +170,26 @@ This configuration file contains the settings related to the Knight Tower, Magic
 
 
 5.`AttackExtraDamage`: This field specifies the random range of additional damage beyond the base value defined by `AttackDamage`. For example, if this field is set to `30`, the total damage dealt by this tower in a single attack is the base `AttackDamage` plus a random additional amount between `0` and `30`.
+
+
+6.`AttackRange`: This field specifies the diameter of the tower’s attack range, centered on the tower. For the Knight Tower, it specifies the range within which its knights can be deployed.
+
+7.`CanAttackAir`: This field specifies whether the tower can attack airborne targets: `0`—no; `1`—yes.
+
+
+8.`CanAttackGround`: This field specifies whether the tower can attack ground targets: `0`—no; `1`—yes.
+
+
+9.`Name`: This field specifies the string name of this tower type.
+
+10.`UpgradePrice`: This field specifies the number of coins required to upgrade this tower type.
+
+11.`UpgradeGrowth`: This field specifies the upgrade multiplier for this tower type. For the Magician Tower and Archer Tower, it increases their attack damage. The damage is calculated as `(AttackDamage + a random value between 0 and AttackExtraDamage) × this field^(tower level)`. For the Knight Tower, the upgrade is reflected in the knights it produces. Both the knights’ movement speed and attack damage are increased, following the same calculation described above.
+
+
+
+12.`Description (Deprecated)`: This field was used in earlier versions to describe different tower types and is now **deprecated**.
+
 
 
 
