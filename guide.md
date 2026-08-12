@@ -174,10 +174,10 @@ This configuration file contains the settings related to the Knight Tower, Magic
 
 6.`AttackRange`: This field specifies the diameter of the tower’s attack range, centered on the tower. For the Knight Tower, it specifies the range within which its knights can be deployed.
 
-7.`CanAttackAir`: This field specifies whether the tower can attack airborne targets: `0`—no; `1`—yes.
+7.`CanAttackAir (Read-only)`: This field specifies whether the tower can attack airborne targets: `0`—no; `1`—yes. In the current game design, the Knight Tower can attack only ground targets by summoning knights and cannot attack airborne targets. The Magician Tower can attack only ground targets, while the Archer Tower can attack both ground and airborne targets. Do not modify this field for any tower type, as doing so may cause runtime errors.
 
 
-8.`CanAttackGround`: This field specifies whether the tower can attack ground targets: `0`—no; `1`—yes.
+8.`CanAttackGround (Read-only)`: This field specifies whether the tower can attack ground targets: `0`—no; `1`—yes. In the current game design, the Knight Tower can attack only ground targets by summoning knights and cannot attack airborne targets. The Magician Tower can attack only ground targets, while the Archer Tower can attack both ground and airborne targets. Do not modify this field for any tower type, as doing so may cause runtime errors.
 
 
 9.`Name`: This field specifies the string name of this tower type.
@@ -208,6 +208,24 @@ This configuration file defines the attributes of knights. Both the knights prod
 
 
 6.`AttackExtraDamage`: This field specifies the random range of additional damage beyond the base value defined by `AttackDamage`. For example, if this field is set to `30`, the total damage dealt by a knight in a single attack is the base `AttackDamage` plus a random additional amount between `0` and `30`.
+
+7.`AttackRange`: This field specifies the diameter of a knight’s attack-trigger range, centered on the knight. When an enemy enters this range, the knight moves toward and actively attacks that enemy.
+
+
+8.`CanAttackAir (Read-only)`: In the current game design, knights can attack only ground targets and cannot attack airborne targets. Do not modify this field, as doing so may cause runtime errors.
+
+
+9.`CanAttackGround (Read-only)`: In the current game design, knights can attack only ground targets and cannot attack airborne targets. Do not modify this field, as doing so may cause runtime errors.
+
+
+10.`FFCompensationValue`: This field specifies the number of coins awarded to the player when the `Friendly Fire Compensation (FFCompensation)` mechanism is triggered.
+
+
+11.`FFCompensationProbability`: This field specifies the probability of triggering the `Friendly Fire Compensation (FFCompensation)` mechanism when a friendly knight is killed.
+
+
+12.`Description (Deprecated)`: This field was used in earlier versions to describe information related to knights and is now **deprecated**.
+
 
 
 ## 3. Other Notes:
