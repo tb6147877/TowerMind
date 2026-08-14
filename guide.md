@@ -19,7 +19,8 @@ For example, the action (-1.5, 1.2, 2) means "construct a Knight Tower at the lo
 
 ## 2. Configuration Table Description
 
-The `td_Data/StreamingAssets/Config` directory under the TowerMind executable contains all configurable files for TowerMind. These files control various utility features and property settings of environment elements. This section provides a detailed explanation of the meaning and usage of each configuration table.
+The `td_Data/StreamingAssets/Config` directory under the TowerMind executable contains all configurable files for TowerMind. These files control various utility features and property settings of environment elements. This section provides a detailed explanation of the meaning and usage of each configuration table. For fields marked **Read-only** or **Deprecated**, please read their descriptions carefully and do not modify their values.
+
 
 
 ### EnvConfig.json:
@@ -226,6 +227,36 @@ This configuration file defines the attributes of knights. Both the knights prod
 
 12.`Description (Deprecated)`: This field was used in earlier versions to describe information related to knights and is now **deprecated**.
 
+
+### KnightReinforcementsConfig.json
+
+This configuration file contains the basic settings related to Knight Reinforcements.
+
+1.`Number (Read-only)`: This field specifies the number of knights summoned by Knight Reinforcements. The game is designed to use `2` knights. Do not modify this field, as doing so may cause runtime errors.
+
+2.`ExistTime`: This field specifies the maximum amount of time that knights summoned by Knight Reinforcements can remain on the battlefield.
+
+
+3.`Description (Deprecated)`: This field was used in earlier versions to describe information related to knight reinforcements and is now **deprecated**.
+
+
+### HeroConfig.json
+
+This configuration file defines the attributes of the hero unit.
+
+1.`FilePath (Read-only)`: This field is required for resource loading during gameplay. Do not modify it.
+
+2.`Health`: This field specifies the maximum health of the hero.
+
+3.`MovementSpeed`: This field specifies the movement speed of the hero, i.e., the distance it travels per second.
+
+4.`AttackSpeed`: This field specifies the attack interval of the hero, measured in seconds. A smaller value corresponds to a faster attack speed.
+
+5.`AttackDamage`: This field specifies the base attack damage of the hero.
+
+3.`AttackExtraDamage`: This field specifies the random range of additional damage beyond the base value defined by `AttackDamage`. For example, if this field is set to `30`, the total damage dealt by the hero in a single attack is the base `AttackDamage` plus a random additional amount between `0` and `30`.
+
+3.`AttackRange`: This field specifies the diameter of the hero’s attack-trigger range, centered on the hero. When an enemy enters this range, the hero moves toward and actively attacks that enemy.
 
 
 ## 3. Other Notes:
