@@ -254,9 +254,37 @@ This configuration file defines the attributes of the hero unit.
 
 5.`AttackDamage`: This field specifies the base attack damage of the hero.
 
-3.`AttackExtraDamage`: This field specifies the random range of additional damage beyond the base value defined by `AttackDamage`. For example, if this field is set to `30`, the total damage dealt by the hero in a single attack is the base `AttackDamage` plus a random additional amount between `0` and `30`.
+6.`AttackExtraDamage`: This field specifies the random range of additional damage beyond the base value defined by `AttackDamage`. For example, if this field is set to `30`, the total damage dealt by the hero in a single attack is the base `AttackDamage` plus a random additional amount between `0` and `30`.
 
-3.`AttackRange`: This field specifies the diameter of the hero’s attack-trigger range, centered on the hero. When an enemy enters this range, the hero moves toward and actively attacks that enemy.
+7.`AttackRange`: This field specifies the diameter of the hero’s attack-trigger range, centered on the hero. When an enemy enters this range, the hero moves toward and actively attacks that enemy.
+
+8.`SkillAttackDamage`: This field specifies the base attack damage of the hero’s Fire of Rage skill.
+
+
+9.`SkillAttackExtraDamage`: This field specifies the random range of additional damage beyond the base value defined by `SkillAttackDamage`. For example, if this field is set to `30`, the total damage dealt by the hero’s Fire of Rage skill in a single attack is the base `SkillAttackDamage` plus a random additional amount between `0` and `30`.
+
+10.`SkillCostHealth`: This field specifies the amount of the hero’s own health consumed when using the Fire of Rage skill.
+
+
+11.`SkillLastTime`: This field specifies how long the flames created by the hero’s Fire of Rage skill remain on the ground, measured in seconds. As long as the flames remain active, they deal damage to enemies that pass through the affected area.
+
+
+12.`SkillAttackRange`: This field specifies the diameter of the effective damage area of the hero’s Fire of Rage skill.
+
+
+13.`UpgradeGoldCoinCost`: This field specifies the number of coins required to upgrade the hero.
+
+14.`UpgradeHealthGrowthValue`: This field specifies the increase in the hero’s maximum health after each level upgrade. Upgrading the hero only increases its maximum health.
+
+
+
+15.`RecoverHealthPerSec`: This field specifies the amount of health the hero recovers per second.
+
+
+16.`ReviveTime`: This field specifies the amount of time, in seconds, the hero must wait before respawning after being killed in battle.
+
+
+17.`CanAttackAir (Read-only)`: In the current game design, the hero can attack both ground  airborne targets. Do not modify this field, as doing so may cause runtime errors.
 
 
 ## 3. Other Notes:
