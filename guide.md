@@ -276,8 +276,6 @@ This configuration file defines the attributes of the hero unit.
 
 14.`UpgradeHealthGrowthValue`: This field specifies the increase in the hero’s maximum health after each level upgrade. Upgrading the hero only increases its maximum health.
 
-
-
 15.`RecoverHealthPerSec`: This field specifies the amount of health the hero recovers per second.
 
 
@@ -285,6 +283,26 @@ This configuration file defines the attributes of the hero unit.
 
 
 17.`CanAttackAir (Read-only)`: In the current game design, the hero can attack both ground  airborne targets. Do not modify this field, as doing so may cause runtime errors.
+
+18.`CanAttackGround (Read-only)`: In the current game design, the hero can attack both ground  airborne targets. Do not modify this field, as doing so may cause runtime errors.
+
+19.`Description (Deprecated)`: This field was used in earlier versions to describe information related to the hero and is now **deprecated**.
+
+
+
+### AllWavesConfig.json
+
+This configuration file defines the settings for different enemy waves. Users can create custom enemy waves by adding new entries to the `Waves` field.
+
+
+1.`ID`: This field specifies the ID of the enemy wave and must be unique. The `Waves` field in the level configuration file uses this ID to determine which enemy waves are included in the level.
+
+
+2.`Enemies`: This field is an array that specifies which enemies are included in the enemy wave. Each number corresponds to the `Type` field defined in `AllEnemiesConfig.json`. Enemies appear in the order specified in the array.
+
+
+3.`EnemiesInterval`: This field specifies the time interval between consecutive enemy spawns, measured in seconds.
+
 
 
 ## 3. Other Notes:
