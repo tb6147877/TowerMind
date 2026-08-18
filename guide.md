@@ -304,6 +304,21 @@ This configuration file defines the settings for different enemy waves. Users ca
 3.`EnemiesInterval`: This field specifies the time interval between consecutive enemy spawns, measured in seconds.
 
 
+### AllEnemiesConfig.json
+
+This configuration file defines the attributes of all enemy types, which are stored in the `Enemies` field.
+
+
+1.`Type (Read-only)`: This field specifies the enemy type. Do not modify this field, as doing so may cause runtime errors.
+
+2.`FilePath (Read-only)`: This field is required for resource loading during gameplay. Do not modify it.
+
+3.`Health`: This field specifies the maximum health of this enemy type.
+
+4.`MovementSpeed`: This field specifies the movement speed of this enemy type, i.e., the distance it travels per second.
+
+5.`AttackSpeed`: This field specifies the attack interval of this enemy type, measured in seconds. A smaller value corresponds to a faster attack speed.
+
 
 ## 3. Other Notes:
 ### 3.1 [Vulkan](https://vulkan.lunarg.com/sdk/home) may need to be installed when CPU rendering is required.
