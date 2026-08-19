@@ -319,6 +319,18 @@ This configuration file defines the attributes of all enemy types, which are sto
 
 5.`AttackSpeed`: This field specifies the attack interval of this enemy type, measured in seconds. A smaller value corresponds to a faster attack speed.
 
+6.`AttackDamage`: This field specifies the base attack damage of this enemy type.
+
+7.`AttackExtraDamage`: This field specifies the random range of additional damage beyond the base value defined by `AttackDamage`. For example, if this field is set to `30`, the total damage dealt by this enemy type in a single attack is the base `AttackDamage` plus a random additional amount between `0` and `30`.
+
+8.`Name (Read-only)`: This field specifies the name of this enemy type. It is defined by the game design and is not recommended to be modified.
+
+9.`MovementType (Read-only)`: This field specifies whether this enemy type moves on the ground or in the air: `Ground` indicates ground movement, while `Flying` indicates aerial movement. It is defined by the game design and is not recommended to be modified.
+
+
+10.`Description`: This field provides a description of the characteristics of this enemy type. Some descriptions are intentionally vague, and the specific characteristics of each enemy are left for players to discover.
+
+
 
 ## 3. Other Notes:
 ### 3.1 [Vulkan](https://vulkan.lunarg.com/sdk/home) may need to be installed when CPU rendering is required.
