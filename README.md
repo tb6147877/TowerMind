@@ -18,21 +18,21 @@ This repository provides the official codebase (including the TowerMind environm
 
 # 📦 Getting Started
 
-## 1.Clone the Repo:
+## 1. Clone the Repo:
 ```bash
 git clone git@github.com:tb6147877/TowerMind.git
 
 cd TowerMind
 ```
 
-## 2.Extracted the Env:
+## 2. Extracted the Env:
 ```bash
 unzip compressed_env/linux.zip -d extracted/
 
 chmod +x ./extracted/linux/td.x86_64
 ```
 
-## 3.1Play as a Human:
+## 3.1 Play as a Human:
 ```bash
 ./extracted/linux/td.x86_64
 ```
@@ -45,7 +45,7 @@ For **Windows** users, simply extract windows.zip in `./compressed_env` to get s
 
 3. Then, you can launch the app by clicking the icon. If macOS prompts for permissions, go to System Settings > Privacy & Security to allow the app to run.
 
-## 3.2Use as a Gym Env:
+## 3.2 Use as a Gym Env:
 ```bash
 conda create -n towermind python=3.10.12 && conda activate towermind
 
@@ -53,6 +53,12 @@ python -m pip install mlagents==1.1.0
 
 python ./hello_world.py
 ```
+
+
+# ☁️ Colab Example
+
+Use this [Colab notebook](https://colab.research.google.com/drive/13AJxze6069ADPAa_NZcVmOo28gSWKiMj?usp=sharing) to quickly try out TowerMind.
+
 
 # 📑 Documentation
 
