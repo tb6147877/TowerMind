@@ -13,7 +13,7 @@ engine_config_channel.set_configuration_parameters(capture_frame_rate=60)
 
 unity_env = UnityEnvironment("/home/[your user name]/TowerMind/extracted/linux/td.x86_64",side_channels=[engine_config_channel])
 env = UnityToGymWrapper(unity_env, uint8_visual=True, allow_multiple_obs=True)
-env = Continuous2DiscreteActionWrapper(env)
+env = Continuous2DiscreteActionWrapper(env) # using this wrapper is necessary.
 
 
 def random_act():
