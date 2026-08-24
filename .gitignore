@@ -29,6 +29,7 @@ share/python-wheels/
 *.egg
 MANIFEST
 
+eval_output/
 .idea/
 data/
 *.txt

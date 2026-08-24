@@ -47,12 +47,24 @@ For **Windows** users, simply extract windows.zip in `./compressed_env` to get s
 
 ## 3.2 Use as a Gym Env:
 ```bash
-conda create -n towermind python=3.10.12 && conda activate towermind
+conda env create -f environment.yml
 
-python -m pip install mlagents==1.1.0
+conda activate towermind
 
 python ./hello_world.py
 ```
+
+
+# 🧠 LLM Evaluation Example
+
+Users can run 
+```bash
+python -m llm_example.llm_run
+``` 
+
+to launch an example of LLM evaluation. This example uses [Ollama](https://ollama.com/) to locally deploy the `llama3.2-vision:11b-instruct-fp16` model for evaluation. For further customization or to develop your own LLM evaluation, please refer to the source code of this example for implementation details.
+
+
 
 
 # ☁️ Colab Example
