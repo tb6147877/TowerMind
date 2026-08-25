@@ -229,6 +229,42 @@ class Continuous2DiscreteActionWrapper(gym.ActionWrapper):
         """Returns a reversed ``action``."""
         print("reverse action")
 
+class TowerMindActionMappingWrapper(gym.ActionWrapper):
+    def __init__(self, env):
+        super().__init__(env)
+
+        self.action_space = gym.spaces.Tuple((
+            gym.spaces.Box(
+                low=-3.0,
+                high=3.0,
+                shape=(1,),
+                dtype=np.float32
+            ),
+            gym.spaces.Box(
+                low=-3.0,
+                high=3.0,
+                shape=(1,),
+                dtype=np.float32
+            ),
+            gym.spaces.Discrete(12)
+        ))
+
+    def action(self, action):
+        """Returns a modified action before :meth:`env.step` is called."""
+        behaviour = action[2]
+        new_behaviour = 0
+        new_x = np.clip(action[0] / 3.0, -1, 1)
+        new_y = np.clip(action[1] / 3.0, -1, 1)
+
+        new_behaviour = intaction_to_floataction(behaviour)
+
+        new_action = np.array([new_x, new_y, new_behaviour], dtype=np.float32)
+        return new_action
+
+    def reverse_action(self, action):
+        """Returns a reversed ``action``."""
+        print("reverse action")
+
 class MultiModalObsWrapper(gym.Wrapper):
     def __init__(self, env):
         super().__init__(env)
