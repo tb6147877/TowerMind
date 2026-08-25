@@ -54,6 +54,11 @@ conda activate towermind
 python ./hello_world.py
 ```
 
+# ⚠️ Note
+When using the TowerMind environment, please ensure that both `TowerMindMultiModalObsWrapper` and `TowerMindActionMappingWrapper` are applied, as demonstrated in `hello_world.py`. These two wrappers are required to ensure correct handling of multimodal observations and proper execution of actions.
+
+If you need to extend or modify the code, please carefully review the implementation of both wrappers beforehand and make sure that the logic defined in them is preserved and executed correctly.
+
 
 # 🧠 LLM Evaluation Example
 

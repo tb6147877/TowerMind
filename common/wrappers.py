@@ -284,3 +284,68 @@ class MultiModalObsWrapper(gym.Wrapper):
         observation = self._convert_obs(observation)
 
         return observation, reward, done, info
+
+class TowerMindMultiModalObsWrapper(gym.Wrapper):
+    def __init__(self, env, use_image, use_text, use_state):
+        super().__init__(env)
+
+        self.use_image = use_image
+        self.use_text = use_text
+        self.use_state = use_state
+
+        assert any([use_image, use_text, use_state]), \
+            "At least one observation modality must be enabled."
+
+        spaces = {}
+
+        if use_image:
+            spaces["image"] = gym.spaces.Box(
+                low=0,
+                high=255,
+                shape=(3, 512, 512),
+                dtype=np.uint8
+            )
+
+        if use_text:
+            spaces["text"] = gym.spaces.Text(
+                max_length=16384
+            )
+
+        if use_state:
+            spaces["state"] = gym.spaces.Box(
+                low=-np.inf,
+                high=np.inf,
+                shape=(759,),
+                dtype=np.float32
+            )
+
+        self.observation_space = gym.spaces.Dict(spaces)
+
+
+    def _convert_obs(self, observation):
+        dict={}
+
+        if self.use_image:
+            texture = observation[0]
+            dict["image"] = texture
+
+        if self.use_text:
+            json_obs = get_json_from_obs(observation[1])
+            dict["text"] = json_obs
+
+        if self.use_state:
+            state_obs = get_state_from_obs(observation[1])
+            dict["state"] = state_obs
+
+        return dict
+
+    def reset(self, **kwargs):
+        observation = self.env.reset(**kwargs)
+        return self._convert_obs(observation)
+
+    def step(self, action):
+        observation, reward, done, info = self.env.step(action)
+
+        observation = self._convert_obs(observation)
+
+        return observation, reward, done, info
