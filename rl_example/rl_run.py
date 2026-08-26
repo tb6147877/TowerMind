@@ -22,8 +22,8 @@ unity_env = UnityEnvironment(os.path.join(os.path.dirname(os.path.dirname(__file
 
 
 env = UnityToGymWrapper(unity_env, uint8_visual=True, allow_multiple_obs=True)
-env = MultiModalObsWrapper(env)
-env = TowerMindActionMappingWrapper(env)
+env = TowerMindMultiModalObsWrapper(env, use_image=True, use_text=True, use_state=False) # using this wrapper is necessary.
+env = TowerMindActionMappingWrapper(env)  # using this wrapper is necessary.
 
 print(env.observation_space)
 print(env.action_space)

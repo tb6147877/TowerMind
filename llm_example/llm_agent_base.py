@@ -118,8 +118,8 @@ class llm_agent_base(agent_base):
 
     def act(self, obs):
         self._stat_action_invalid_rate(obs)
-        image_obs=obs[0]
-        json_obs=obs[1]
+        image_obs=obs["image"]
+        json_obs=obs["text"]
         temp=self._combine_prompts(json_obs)
         prompt=temp[0]
         action=self._query(prompt,image_obs)
@@ -133,6 +133,6 @@ class llm_agent_base(agent_base):
         self.invalid_action_dict.clear()
 
     def record_step_data(self, path, obs, counter):
-        create_one_step_json_file(obs[1], counter, path)
+        create_one_step_json_file(obs["text"], counter, path)
         if self.is_vision:
-            create_one_step_img_file(np.transpose(obs[0].squeeze(), (1,2,0)), counter, path)
+            create_one_step_img_file(np.transpose(obs["image"].squeeze(), (1,2,0)), counter, path)

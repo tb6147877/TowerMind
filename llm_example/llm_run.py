@@ -16,15 +16,15 @@ engine_config_channel.set_configuration_parameters(capture_frame_rate=60)
 
 unity_env = UnityEnvironment(os.path.join(os.path.dirname(os.path.dirname(__file__)), "extracted/linux/td.x86_64"),side_channels=[engine_config_channel])
 env = UnityToGymWrapper(unity_env, uint8_visual=True, allow_multiple_obs=True)
-env = MultiModalObsWrapper(env)
-env = TowerMindActionMappingWrapper(env)
+env = TowerMindMultiModalObsWrapper(env, use_image=True, use_text=True, use_state=False) # using this wrapper is necessary.
+env = TowerMindActionMappingWrapper(env)  # using this wrapper is necessary.
 
 agent =llama_11b_agent(name="llama_11b_agent",is_vision=True, history_length=3)
 output_folder_path = create_one_eval_output_folder()
 set_random_seed(42)
 set_target_level(0)
 
-state = env.reset()
+obs = env.reset()
 
 video_path = os.path.join(output_folder_path, "video.mp4")
 writer = imageio.get_writer(video_path, fps=30)
@@ -37,11 +37,11 @@ step_counter=0
 
 
 while not done:
-    action = agent.act(state)
-    state, reward, done, _ = env.step(action)
+    action = agent.act(obs)
+    obs, reward, done, _ = env.step(action)
     total_reward += reward
     writer.append_data(np.transpose(env.render().squeeze(), (1, 2, 0)))
-    agent.record_step_data(output_folder_path, state, step_counter)
+    agent.record_step_data(output_folder_path, obs, step_counter)
     step_counter = step_counter + 1
 
 writer.close()

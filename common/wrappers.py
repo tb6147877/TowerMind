@@ -265,26 +265,6 @@ class TowerMindActionMappingWrapper(gym.ActionWrapper):
         """Returns a reversed ``action``."""
         print("reverse action")
 
-class MultiModalObsWrapper(gym.Wrapper):
-    def __init__(self, env):
-        super().__init__(env)
-
-    def _convert_obs(self, observation):
-        texture = observation[0]
-        json_obs = get_json_from_obs(observation[1])
-        return texture, json_obs
-
-    def reset(self, **kwargs):
-        observation = self.env.reset(**kwargs)
-        return self._convert_obs(observation)
-
-    def step(self, action):
-        observation, reward, done, info = self.env.step(action)
-
-        observation = self._convert_obs(observation)
-
-        return observation, reward, done, info
-
 class TowerMindMultiModalObsWrapper(gym.Wrapper):
     def __init__(self, env, use_image, use_text, use_state):
         super().__init__(env)
