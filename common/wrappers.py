@@ -1,6 +1,7 @@
 import numpy as np
 import json
 import gym
+import cv2
 
 
 
@@ -209,26 +210,6 @@ def intaction_to_floataction(behaviour):
     return normalized * 2.0 - 1.0  # map to [-1, 1]
 
 
-class Continuous2DiscreteActionWrapper(gym.ActionWrapper):
-    def __init__(self, env):
-        gym.ActionWrapper.__init__(self, env)
-
-    def action(self, action):
-        """Returns a modified action before :meth:`env.step` is called."""
-        behaviour = action[2]
-        new_behaviour = 0
-        new_x = np.clip(action[0] / 3.0, -1, 1)
-        new_y = np.clip(action[1] / 3.0, -1, 1)
-
-        new_behaviour = intaction_to_floataction(behaviour)
-
-        new_action = np.array([new_x, new_y, new_behaviour], dtype=np.float32)
-        return new_action
-
-    def reverse_action(self, action):
-        """Returns a reversed ``action``."""
-        print("reverse action")
-
 class TowerMindActionMappingWrapper(gym.ActionWrapper):
     def __init__(self, env):
         super().__init__(env)
@@ -329,3 +310,88 @@ class TowerMindMultiModalObsWrapper(gym.Wrapper):
         observation = self._convert_obs(observation)
 
         return observation, reward, done, info
+
+class TowerMindImageBasedRLWrapper(gym.Wrapper):
+    def __init__(self, env, behaviour_number, split_rate, img_shape=(3, 84, 84), channel_first=True):
+        super().__init__(env)
+
+        self.img_shape = img_shape
+        self.channel_first = channel_first
+
+        self.observation_space = gym.spaces.Box(
+            low=0,
+            high=255,
+            shape=self.img_shape,
+            dtype=np.uint8,
+        )
+
+        self.bins = np.array([split_rate, split_rate, behaviour_number])
+        self.total_bins = int(np.prod(self.bins))
+        self.action_space = gym.spaces.Discrete(self.total_bins)
+
+    def reset(self, **kwargs):
+        obs = self.env.reset(**kwargs)
+
+        obs = self.process_observation(obs)
+
+        return obs
+
+    def step(self, action):
+        # Single discrete action -> three discrete indices
+        d0 = action // (self.bins[1] * self.bins[2])
+
+        remainder = action % (
+                self.bins[1] * self.bins[2]
+        )
+
+        d1 = remainder // self.bins[2]
+        d2 = remainder % self.bins[2]
+
+        discrete_tuple = (d0, d1, d2)
+
+        # Three discrete indices -> three continuous values
+        continuous_action = self.discrete_to_continuous(
+            discrete_tuple
+        )
+
+        obs, reward, done, info = self.env.step(
+            continuous_action
+        )
+
+        obs = self.process_observation(obs)
+
+        return obs, reward, done, info
+
+    def discrete_to_continuous(self, discrete_tuple):
+        discrete_array = np.asarray(
+            discrete_tuple,
+            dtype=np.float32,
+        )
+
+        continuous = (
+                (discrete_array + 0.5)
+                * (2.0 / self.bins)
+                - 1.0
+        )
+
+        return continuous.astype(np.float32)
+
+    def process_observation(self, obs):
+        # Original observation: (C, H, W)
+        if self.channel_first and obs.ndim == 3:
+            obs = np.transpose(obs["image"], (1, 2, 0))
+
+        target_height = self.shape[1]
+        target_width = self.shape[2]
+
+        obs = cv2.resize(
+            obs,
+            (target_width, target_height),
+            interpolation=cv2.INTER_AREA,
+        )
+
+        # Convert back to (C, H, W)
+        if self.channel_first:
+            obs = np.transpose(obs, (2, 0, 1))
+
+        return obs.astype(np.uint8)
