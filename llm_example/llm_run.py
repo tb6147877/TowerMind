@@ -9,6 +9,9 @@ from mlagents_envs.envs.unity_gym_env import UnityToGymWrapper
 from mlagents_envs.side_channel.engine_configuration_channel import EngineConfigurationChannel
 import os
 
+set_random_seed(42)
+set_target_level(0)
+
 engine_config_channel = EngineConfigurationChannel()
 engine_config_channel.set_configuration_parameters(target_frame_rate=-1)
 engine_config_channel.set_configuration_parameters(time_scale=20.0)
@@ -21,8 +24,7 @@ env = TowerMindActionMappingWrapper(env)  # using this wrapper is necessary.
 
 agent =llama_11b_agent(name="llama_11b_agent",is_vision=True, history_length=3)
 output_folder_path = create_one_eval_output_folder()
-set_random_seed(42)
-set_target_level(0)
+
 
 obs = env.reset()
 

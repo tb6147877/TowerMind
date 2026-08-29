@@ -22,6 +22,18 @@ def set_random_seed(seed):
     data["RandomSeed"]=seed
     write_data_to_json_file(data, file_path)
 
+def set_rl_step_penalty(enabled:bool):
+    file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "extracted/linux/td_Data/StreamingAssets/Config", "EnvConfig.json")
+    data = load_data_from_json_file(file_path)
+    data["IsDrlReward"]=1 if enabled else 0
+    write_data_to_json_file(data, file_path)
+
+def set_only_image_obs(enabled:bool):
+    file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "extracted/linux/td_Data/StreamingAssets/Config", "EnvConfig.json")
+    data = load_data_from_json_file(file_path)
+    data["IsOnlyPixelObs"]=1 if enabled else 0
+    write_data_to_json_file(data, file_path)
+
 def set_target_level(level):
     file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "extracted/linux/td_Data/StreamingAssets/Config", "FixedLevelsConfig.json")
     current_train_level = level

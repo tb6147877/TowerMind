@@ -6,6 +6,9 @@ from common.wrappers import *
 from mlagents_envs.side_channel.engine_configuration_channel import EngineConfigurationChannel
 import os
 
+set_random_seed(42)
+set_target_level(3) # select a level
+
 engine_config_channel = EngineConfigurationChannel()
 engine_config_channel.set_configuration_parameters(target_frame_rate=-1)
 engine_config_channel.set_configuration_parameters(time_scale=20.0)
@@ -16,8 +19,7 @@ env = UnityToGymWrapper(unity_env, uint8_visual=True, allow_multiple_obs=True)
 env = TowerMindMultiModalObsWrapper(env, use_image=True, use_text=True, use_state=True) # using this wrapper is necessary.
 env = TowerMindActionMappingWrapper(env) # using this wrapper is necessary.
 
-set_random_seed(42)
-set_target_level(2) # select a level
+
 
 print("Observation Space:",env.observation_space)
 print("Action Space:", env.action_space)

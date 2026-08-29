@@ -280,6 +280,7 @@ class TowerMindMultiModalObsWrapper(gym.Wrapper):
                 dtype=np.float32
             )
 
+
         self.observation_space = gym.spaces.Dict(spaces)
 
 
