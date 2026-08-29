@@ -66,7 +66,7 @@ dependencies:
       - mlagents-envs==1.1.0
       - mpmath==1.3.0
       - networkx==3.4.2
-      - numpy==2.2.6
+      - numpy==1.23.5
       - nvidia-cublas==13.1.1.3
       - nvidia-cuda-cupti==13.0.85
       - nvidia-cuda-nvrtc==13.0.88
@@ -83,7 +83,7 @@ dependencies:
       - nvidia-nvshmem-cu13==3.4.5
       - nvidia-nvtx==13.0.85
       - onnx==1.15.0
-      - opencv-python==5.0.0.93
+      - opencv-python==4.10.0.84
       - pettingzoo==1.15.0
       - pillow==12.3.0
       - protobuf==3.20.3

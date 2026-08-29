@@ -378,11 +378,11 @@ class TowerMindImageBasedRLWrapper(gym.Wrapper):
 
     def process_observation(self, obs):
         # Original observation: (C, H, W)
-        if self.channel_first and obs.ndim == 3:
+        if self.channel_first and obs["image"].ndim == 3:
             obs = np.transpose(obs["image"], (1, 2, 0))
 
-        target_height = self.shape[1]
-        target_width = self.shape[2]
+        target_height = self.img_shape[1]
+        target_width = self.img_shape[2]
 
         obs = cv2.resize(
             obs,
