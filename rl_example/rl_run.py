@@ -79,11 +79,10 @@ class ReplayBuffer:
         )
 
     def sample_batch(self) -> Dict[str, np.ndarray]:
-
-        idxs = np.random.choice(
+        idxs = np.random.randint(
+            0,
             self.size,
-            size=self.batch_size,
-            replace=False
+            size=self.batch_size
         )
 
         return dict(
@@ -238,7 +237,7 @@ class Network(nn.Module):
 
 
 class DQNAgent:
-    def __init__(self, env:gym.Env, memory_size:int, batch_size:int, target_update:int, epsilon_decay:float, seed:int, learning_rate:float, max_epsilon:float=1.0, min_epsilon:float=0.05,gamma:float=0.99, learning_starts = 50_000):
+    def __init__(self, env:gym.Env, memory_size:int, batch_size:int, target_update:int, epsilon_decay:float, seed:int, learning_rate:float, max_epsilon:float=1.0, min_epsilon:float=0.05,gamma:float=0.999, learning_starts = 50_000, eval_num=10, output_path=""):
         obs_dim = env.observation_space.shape
         action_dim = env.action_space.n
 
@@ -253,6 +252,8 @@ class DQNAgent:
         self.target_update = target_update
         self.gamma = gamma
         self.learning_starts = learning_starts
+        self.eval_num = eval_num
+        self.output_path = output_path
 
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         print(self.device)
@@ -305,7 +306,7 @@ class DQNAgent:
         self.optimizer.step()
         return loss.item()
 
-    def train(self,num_frames:int, plotting_interval:int=200):
+    def train(self,num_frames:int, plotting_interval:int=200, eval_interval=10000, train_freq = 4):
         self.is_test=False
         state= self.env.reset()
         update_cnt=0
@@ -314,20 +315,28 @@ class DQNAgent:
         scores=[]
         score=0
 
+        eval_counter=0
+
         for frame_idx in range(1, num_frames+1):
             action = self.select_action(state)
             next_state, reward, done= self.step(action)
 
             state = next_state
             score += reward
+            eval_counter += 1
 
             if done:
-                state = self.env.reset()
-                scores.append(score)
-                print({"step":frame_idx, "score":score})
-                score=0
+                print({"step": frame_idx, "score": score})
+                score = 0
 
-            if frame_idx >= self.learning_starts:
+                if eval_counter>=eval_interval:
+                    eval_results=self.test()
+                    eval_counter=0
+                    scores.append(np.mean(eval_results))
+
+                state = self.env.reset()
+
+            if frame_idx >= self.learning_starts and frame_idx % train_freq == 0:
                 loss=self.update_model()
                 losses.append(loss)
                 update_cnt += 1
@@ -342,26 +351,43 @@ class DQNAgent:
                 self._plot(frame_idx,scores,losses,epsilons)
 
 
-    def test(self, video_folder:str)->None:
-        self.is_test=True
 
-        # naive_env=self.env
-        # self.env = gym.wrappers.RecordVideo(self.env,video_folder=video_folder)
 
-        state = self.env.reset()
-        done=False
-        score=0
+    def test(self):
+        previous_is_test = self.is_test
+        self.is_test = True
 
-        while not done:
-            action = self.select_action(state)
-            next_state, reward, done = self.step(action)
-            state = next_state
-            score += reward
+        self.dqn.eval()
 
-        print("score:",score)
-        #self.env.close()
+        results=[]
 
-        #self.env = naive_env
+        for index in range(self.eval_num):
+            state = self.env.reset()
+            done = False
+            score = 0
+
+            while not done:
+                action = self.select_action(state)
+                next_state, reward, done = self.step(action)
+                state = next_state
+                score += reward
+
+            print("----------------------eval score:", score)
+            results.append(score)
+
+        mean_score = np.mean(results)
+        print("----------------------eval mean score:", mean_score)
+
+        torch.save(self.dqn.state_dict(),os.path.join(self.output_path, "dqn_model.pth"))
+
+        self.is_test = previous_is_test
+
+        if not self.is_test:
+            self.dqn.train()
+
+        return results
+
+
 
     def _compute_dqn_loss(
             self,
@@ -456,7 +482,7 @@ class DQNAgent:
         plt.tight_layout()
 
         plt.savefig(
-            "training_progress.png",
+            os.path.join(self.output_path, "training_progress.png"),
             dpi=150,
             bbox_inches="tight"
         )
@@ -485,21 +511,6 @@ print("Observation Space:",env.observation_space)
 print("Action Space:", env.action_space)
 
 
-
-"""
-obs=env.reset()
-done = False
-
-#img = np.transpose(obs, (1, 2, 0))
-#Image.fromarray(img).save("image.png")
-
-
-while not done:
-    action = env.action_space.sample()
-    obs, _, done, info = env.step(action)
-"""
-
-
 def seed_torch(seed):
     torch.manual_seed(seed)
     if torch.backends.cudnn.enabled:
@@ -512,20 +523,23 @@ def seed_torch(seed):
 np.random.seed(seed)
 seed_torch(seed)
 
-
-
+output_folder_path = create_one_eval_output_folder()
 num_frames=2000000
 memory_size=500000
 batch_size=256
 target_update=10000
 epsilon_decay=1/300000
 learning_rate=1e-4
+plotting_interval = 10000
+eval_interval=10000
+eval_number=10
+train_freq=4
 
-agent = DQNAgent(env,memory_size,batch_size,target_update,epsilon_decay,seed,learning_rate)
 
-agent.train(num_frames)
+agent = DQNAgent(env=env, memory_size=memory_size, batch_size=batch_size, target_update=target_update,epsilon_decay=epsilon_decay,seed=seed, learning_rate=learning_rate, eval_num=eval_number, output_path=output_folder_path)
 
-video_folder="videos/dqn_double"
-agent.test(video_folder)
+agent.train(num_frames, plotting_interval, eval_interval, train_freq)
+
+agent.test()
 
 env.close()
